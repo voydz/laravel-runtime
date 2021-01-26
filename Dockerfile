@@ -33,6 +33,9 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 COPY ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./config/php-fpm.conf /etc/php/8.0/fpm/php-fpm.conf
 
+# help php to open its socket
+RUN mkdir -p /var/run/php
+
 EXPOSE 80
 
 # entrypoint
