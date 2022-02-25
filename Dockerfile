@@ -32,6 +32,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 COPY ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./config/php-fpm.conf /etc/php/8.1/fpm/php-fpm.conf
+COPY ./config/default /etc/nginx/sites-available/default
+COPY ./config/crontab /etc/cron.d/crontab
+
+# help crontab to get started
+RUN chmod 0644 /etc/cron.d/crontab
+RUN crontab /etc/cron.d/crontab
 
 # help php to open its socket
 RUN mkdir -p /var/run/php
