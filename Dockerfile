@@ -14,12 +14,12 @@ RUN apt-get update \
 # service dependencies
 RUN apt-get update \
     && apt-get install -y cron curl zip unzip git supervisor mysql-client \
-    && apt-get install -y nginx php8.1-fpm php8.1-cli \
-       php8.1-gd php8.1-curl php8.1-imap \
-       php8.1-mysql php8.1-mbstring php8.1-xml \
-       php8.1-zip php8.1-bcmath php8.1-soap \
-       php8.1-intl php8.1-readline php8.1-msgpack \
-       php8.1-igbinary php8.1-redis \
+    && apt-get install -y nginx php8.3-fpm php8.3-cli \
+       php8.3-gd php8.3-curl php8.3-imap \
+       php8.3-mysql php8.3-mbstring php8.3-xml \
+       php8.3-zip php8.3-bcmath php8.3-soap \
+       php8.3-intl php8.3-readline php8.3-msgpack \
+       php8.3-igbinary php8.3-redis \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get -y autoremove \
     && apt-get clean \
@@ -31,7 +31,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./config/php-fpm.conf /etc/php/8.1/fpm/php-fpm.conf
+COPY ./config/php-fpm.conf /etc/php/8.3/fpm/php-fpm.conf
 COPY ./config/default /etc/nginx/sites-available/default
 COPY ./config/crontab /etc/cron.d/crontab
 
